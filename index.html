@@ -756,8 +756,7 @@
       <a href="#flagship" class="hover-trigger">Melto Run</a>
       <a href="#expertise" class="hover-trigger">Studio</a>
       <a href="#roadmap" class="hover-trigger">Roadmap</a>
-      <div id="nav-cta-container" style="display:inline-block;">
-        </div>
+      <div id="nav-cta-container" style="display:inline-block;"></div>
     </div>
   </nav>
 
@@ -769,8 +768,7 @@
       <img src="CompressJPEG.Online_img(512x512) (1).jpg" alt="TST Logo" class="hero-logo-large magnetic hover-trigger">
       <h1 class="title-glitch">Built to Innovate<br>& Entertain</h1>
       <p class="hero-desc">TST Labs crafts immersive digital landscapes and high-performance interactive media—pushing the boundaries of browser gaming and entertainment.</p>
-      <div id="hero-action-container">
-        </div>
+      <div id="hero-action-container"></div>
     </div>
     <div class="scroll-indicator">Scroll</div>
   </header>
@@ -781,9 +779,8 @@
     </div>
 
     <div class="flagship-grid">
-      <div class="flagship-visual magnetic hover-trigger reveal">
-        <div id="flagship-image-container">
-          </div>
+      <div class="flagship-visual magnetic hover-trigger reveal" id="flagship-image-container">
+        <!-- Rendered dynamically depending on payment state -->
       </div>
       
       <div class="flagship-content reveal" style="transition-delay: 0.2s;">
@@ -800,8 +797,7 @@
           <li>Weekly Event Challenges</li>
         </ul>
 
-        <div id="flagship-action-container">
-          </div>
+        <div id="flagship-action-container"></div>
       </div>
     </div>
 
@@ -936,7 +932,7 @@
       const flagshipActionContainer = document.getElementById('flagship-action-container');
       const flagshipImageContainer = document.getElementById('flagship-image-container');
 
-      let hasPaid = false; // Replace this logic with a fetch request to your backend endpoint checking user session/database status.
+      let hasPaid = false;
 
       try {
         const response = await fetch('/api/get-user-profile');
@@ -945,12 +941,10 @@
           hasPaid = userData.hasPaid;
         }
       } catch (e) {
-        // Fallback state if backend is offline or during testing
         hasPaid = false; 
       }
 
       if (hasPaid) {
-        // Unlocked state (Play / Launch Game)
         navCtaContainer.innerHTML = `<a href="https://super-monio-run-website2.vercel.app" target="_blank" class="hover-trigger nav-cta">Play Now</a>`;
         heroActionContainer.innerHTML = `<a href="https://super-monio-run-website2.vercel.app" target="_blank" class="btn-primary hover-trigger">Play Melto Run</a>`;
         flagshipActionContainer.innerHTML = `<a href="https://super-monio-run-website2.vercel.app" target="_blank" class="btn-primary hover-trigger">Launch Live Game</a>`;
@@ -960,7 +954,6 @@
           </a>
         `;
       } else {
-        // Locked state (Pay ₹100 to Unlock)
         navCtaContainer.innerHTML = `<button onclick="initiatePayment()" class="hover-trigger nav-cta" style="background:transparent; border:1px solid var(--accent-orange); color:var(--accent-orange)!important; cursor:pointer;">Pay ₹100</button>`;
         heroActionContainer.innerHTML = `<button onclick="initiatePayment()" class="btn-primary hover-trigger" style="cursor:pointer;">Get Melto Run (₹100)</button>`;
         flagshipActionContainer.innerHTML = `<button onclick="initiatePayment()" class="btn-primary hover-trigger" style="cursor:pointer;">Unlock Game (₹100)</button>`;
@@ -973,16 +966,40 @@
       }
     }
 
-    // Trigger payment system hook
-    function initiatePayment() {
-      // Hook up your payment gateway client script (e.g., BillDesk, Razorpay) here.
-      // Funds will route directly to the merchant business bank account configured on your gateway dashboard.
-      alert("Redirecting to secure payment gateway (₹100)... Funds will route directly to your verified business account.");
-      // Example simulation of payment success for testing:
-      // fetch('/api/create-payment-session', { method: 'POST' })...
+    // 2. BILLDESK PAYMENT GATEWAY HOOK
+    async function initiatePayment() {
+      try {
+        const response = await fetch('/api/create-billdesk-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: "100.00" })
+        });
+
+        const data = await response.json();
+
+        if (data.success && data.gatewayUrl && data.msg) {
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = data.gatewayUrl;
+
+          const hiddenField = document.createElement('input');
+          hiddenField.type = 'hidden';
+          hiddenField.name = 'msg';
+          hiddenField.value = data.msg;
+
+          form.appendChild(hiddenField);
+          document.body.appendChild(form);
+          form.submit();
+        } else {
+          alert("Unable to initiate secure payment session. Please try again later.");
+        }
+      } catch (error) {
+        console.error("Payment initialization error:", error);
+        alert("Connection error occurred while connecting to the payment server.");
+      }
     }
 
-    // 2. DYNAMIC PRELOADER PROGRESS FILLER
+    // 3. DYNAMIC PRELOADER PROGRESS FILLER
     window.addEventListener('DOMContentLoaded', () => {
       checkUserAccess();
       const fill = document.getElementById('loader-fill');
@@ -1007,7 +1024,7 @@
       }, 1000);
     }
 
-    // 3. AMBIENT BACKGROUND PARTICLE & WEB NET FIELD
+    // 4. AMBIENT BACKGROUND PARTICLE & WEB NET FIELD
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -1078,7 +1095,7 @@
     }
     animateParticles();
 
-    // 4. CUSTOM HUD CURSOR ENGINE
+    // 5. CUSTOM HUD CURSOR ENGINE
     const cursorRing = document.getElementById('cursor-ring');
     const cursorDot = document.getElementById('cursor-dot');
     let mouseX = 0, mouseY = 0;
@@ -1105,7 +1122,7 @@
       el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-hover'));
     });
 
-    // 5. SCROLL REVEAL OBSERVER
+    // 6. SCROLL REVEAL OBSERVER
     function initScrollReveal() {
       const reveals = document.querySelectorAll('.reveal');
       const observer = new IntersectionObserver((entries, obs) => {
