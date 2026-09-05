@@ -6,8 +6,8 @@
   <title>TST Labs | Engineering the Future of Play</title>
   <style>
     /* =========================================
-       CORE VARIABLES & GLOBAL RESET
-       ========================================= */
+        CORE VARIABLES & GLOBAL RESET
+        ========================================= */
     :root {
       --bg-dark: #020408;
       --bg-surface: #070b14;
@@ -50,8 +50,8 @@
     ::-webkit-scrollbar-thumb { background: linear-gradient(var(--accent-blue), var(--accent-cyan)); border-radius: 4px; }
 
     /* =========================================
-       ADVANCED PRELOADER
-       ========================================= */
+        ADVANCED PRELOADER
+        ========================================= */
     #preloader {
       position: fixed;
       inset: 0;
@@ -114,8 +114,8 @@
     }
 
     /* =========================================
-       CUSTOM HUD CURSOR
-       ========================================= */
+        CUSTOM HUD CURSOR
+        ========================================= */
     #cursor-ring {
       position: fixed;
       width: 36px; height: 36px;
@@ -148,8 +148,8 @@
     }
 
     /* =========================================
-       DYNAMIC MESH BACKGROUND & PARTICLES
-       ========================================= */
+        DYNAMIC MESH BACKGROUND & PARTICLES
+        ========================================= */
     .ambient-bg {
       position: fixed;
       inset: 0;
@@ -178,8 +178,8 @@
     }
 
     /* =========================================
-       NAVIGATION
-       ========================================= */
+        NAVIGATION
+        ========================================= */
     nav {
       position: fixed;
       top: 0; width: 100%;
@@ -261,8 +261,8 @@
     .nav-cta::after { display: none !important; }
 
     /* =========================================
-       HERO PARALLAX SECTION
-       ========================================= */
+        HERO PARALLAX SECTION
+        ========================================= */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -348,8 +348,8 @@
     }
 
     /* =========================================
-       SECTION CONTAINERS & UTILS
-       ========================================= */
+        SECTION CONTAINERS & UTILS
+        ========================================= */
     .section {
       padding: 9rem 6%;
       position: relative;
@@ -384,8 +384,8 @@
     }
 
     /* =========================================
-       FLAGSHIP GAME: MELTO RUN ONLINE
-       ========================================= */
+        FLAGSHIP GAME: MELTO RUN ONLINE
+        ========================================= */
     .flagship-grid {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
@@ -475,6 +475,7 @@
       letter-spacing: 2px;
       text-decoration: none;
       border-radius: 6px;
+      border: none;
       transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
       position: relative;
       overflow: hidden;
@@ -488,8 +489,8 @@
     }
 
     /* =========================================
-       GAME MECHANICS & LORE CARDS
-       ========================================= */
+        GAME MECHANICS & LORE CARDS
+        ========================================= */
     .mechanics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -540,8 +541,8 @@
     }
 
     /* =========================================
-       STUDIO EXPERTISE
-       ========================================= */
+        STUDIO EXPERTISE
+        ========================================= */
     .expertise-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -576,8 +577,8 @@
     }
 
     /* =========================================
-       DEVELOPMENT ROADMAP
-       ========================================= */
+        DEVELOPMENT ROADMAP
+        ========================================= */
     .roadmap {
       position: relative;
       max-width: 1100px;
@@ -635,8 +636,8 @@
     .roadmap-content p { color: var(--text-muted); }
 
     /* =========================================
-       TECH INFRASTRUCTURE STATS
-       ========================================= */
+        TECH INFRASTRUCTURE STATS
+        ========================================= */
     .tech-stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -652,8 +653,8 @@
     .stat-box p { color: var(--text-muted); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
 
     /* =========================================
-       FOOTER
-       ========================================= */
+        FOOTER
+        ========================================= */
     footer {
       background: #010204;
       padding: 6rem 6% 2.5rem 6%;
@@ -685,8 +686,8 @@
     }
 
     /* =========================================
-       ANIMATIONS & RESPONSIVE
-       ========================================= */
+        ANIMATIONS & RESPONSIVE
+        ========================================= */
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-15px); }
@@ -726,7 +727,6 @@
 </head>
 <body>
 
-  <!-- ADVANCED PRELOADER -->
   <div id="preloader">
     <div class="loader-logo-wrap">
       <img src="CompressJPEG.Online_img(512x512) (1).jpg" alt="TST Labs Icon">
@@ -737,7 +737,6 @@
     </div>
   </div>
 
-  <!-- HUD ELEMENTS -->
   <div class="scanlines"></div>
   <div id="cursor-ring"></div>
   <div id="cursor-dot"></div>
@@ -748,7 +747,6 @@
     <div class="glow-orb orb-tertiary"></div>
   </div>
 
-  <!-- NAVIGATION -->
   <nav id="navbar">
     <a href="#" class="nav-brand magnetic hover-trigger">
       <img src="CompressJPEG.Online_img(512x512) (1).jpg" alt="TST Labs Logo">
@@ -758,11 +756,11 @@
       <a href="#flagship" class="hover-trigger">Melto Run</a>
       <a href="#expertise" class="hover-trigger">Studio</a>
       <a href="#roadmap" class="hover-trigger">Roadmap</a>
-      <a href="https://super-monio-run-website2.vercel.app" target="_blank" class="hover-trigger nav-cta">Play Now</a>
+      <div id="nav-cta-container" style="display:inline-block;">
+        </div>
     </div>
   </nav>
 
-  <!-- HERO PARALLAX -->
   <header class="hero">
     <div class="parallax-layer" id="prlx-bg">
       <img src="CompressJPEG.Online_img(4096x2304).jpg" alt="Epic Tech Banner">
@@ -771,12 +769,12 @@
       <img src="CompressJPEG.Online_img(512x512) (1).jpg" alt="TST Logo" class="hero-logo-large magnetic hover-trigger">
       <h1 class="title-glitch">Built to Innovate<br>& Entertain</h1>
       <p class="hero-desc">TST Labs crafts immersive digital landscapes and high-performance interactive media—pushing the boundaries of browser gaming and entertainment.</p>
-      <a href="https://super-monio-run-website2.vercel.app" target="_blank" class="btn-primary hover-trigger">Play Melto Run</a>
+      <div id="hero-action-container">
+        </div>
     </div>
     <div class="scroll-indicator">Scroll</div>
   </header>
 
-  <!-- MAIN FLAGSHIP SHOWCASE: MELTO RUN ONLINE MULTIPLAYER -->
   <section id="flagship" class="section">
     <div class="section-header reveal">
       <h2 class="section-title">The Ultimate Evolution</h2>
@@ -784,9 +782,8 @@
 
     <div class="flagship-grid">
       <div class="flagship-visual magnetic hover-trigger reveal">
-        <a href="https://super-monio-run-website2.vercel.app" target="_blank">
-          <img src="Untitled project (18).jpg" alt="Melto Run Cyborg Fox Character">
-        </a>
+        <div id="flagship-image-container">
+          </div>
       </div>
       
       <div class="flagship-content reveal" style="transition-delay: 0.2s;">
@@ -803,7 +800,8 @@
           <li>Weekly Event Challenges</li>
         </ul>
 
-        <a href="https://super-monio-run-website2.vercel.app" target="_blank" class="btn-primary hover-trigger">Launch Live Game</a>
+        <div id="flagship-action-container">
+          </div>
       </div>
     </div>
 
@@ -823,7 +821,6 @@
     </div>
   </section>
 
-  <!-- STUDIO EXPERTISE -->
   <section id="expertise" class="section">
     <div class="section-header reveal">
       <h2 class="section-title">Studio Portfolio</h2>
@@ -845,7 +842,6 @@
     </div>
   </section>
 
-  <!-- DEVELOPMENT ROADMAP -->
   <section id="roadmap" class="section">
     <div class="section-header reveal">
       <h2 class="section-title">Melto Run: Roadmap</h2>
@@ -881,7 +877,6 @@
     </div>
   </section>
 
-  <!-- TECHNICAL INFRASTRUCTURE -->
   <section class="section">
     <div class="tech-stats reveal">
       <div class="stat-box hover-trigger">
@@ -903,7 +898,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
       <div class="footer-col">
@@ -934,12 +928,63 @@
     </div>
   </footer>
 
-  <!-- =========================================
-       HIGH-PERFORMANCE JAVASCRIPT ENGINE
-       ========================================= -->
   <script>
-    // 1. DYNAMIC PRELOADER PROGRESS FILLER
+    // 1. DYNAMIC PAYMENT & ACCESS CHECKER
+    async function checkUserAccess() {
+      const navCtaContainer = document.getElementById('nav-cta-container');
+      const heroActionContainer = document.getElementById('hero-action-container');
+      const flagshipActionContainer = document.getElementById('flagship-action-container');
+      const flagshipImageContainer = document.getElementById('flagship-image-container');
+
+      let hasPaid = false; // Replace this logic with a fetch request to your backend endpoint checking user session/database status.
+
+      try {
+        const response = await fetch('/api/get-user-profile');
+        if (response.ok) {
+          const userData = await response.json();
+          hasPaid = userData.hasPaid;
+        }
+      } catch (e) {
+        // Fallback state if backend is offline or during testing
+        hasPaid = false; 
+      }
+
+      if (hasPaid) {
+        // Unlocked state (Play / Launch Game)
+        navCtaContainer.innerHTML = `<a href="https://super-monio-run-website2.vercel.app" target="_blank" class="hover-trigger nav-cta">Play Now</a>`;
+        heroActionContainer.innerHTML = `<a href="https://super-monio-run-website2.vercel.app" target="_blank" class="btn-primary hover-trigger">Play Melto Run</a>`;
+        flagshipActionContainer.innerHTML = `<a href="https://super-monio-run-website2.vercel.app" target="_blank" class="btn-primary hover-trigger">Launch Live Game</a>`;
+        flagshipImageContainer.innerHTML = `
+          <a href="https://super-monio-run-website2.vercel.app" target="_blank">
+            <img src="Untitled project (18).jpg" alt="Melto Run Cyborg Fox Character">
+          </a>
+        `;
+      } else {
+        // Locked state (Pay ₹100 to Unlock)
+        navCtaContainer.innerHTML = `<button onclick="initiatePayment()" class="hover-trigger nav-cta" style="background:transparent; border:1px solid var(--accent-orange); color:var(--accent-orange)!important; cursor:pointer;">Pay ₹100</button>`;
+        heroActionContainer.innerHTML = `<button onclick="initiatePayment()" class="btn-primary hover-trigger" style="cursor:pointer;">Get Melto Run (₹100)</button>`;
+        flagshipActionContainer.innerHTML = `<button onclick="initiatePayment()" class="btn-primary hover-trigger" style="cursor:pointer;">Unlock Game (₹100)</button>`;
+        flagshipImageContainer.innerHTML = `
+          <div onclick="initiatePayment()" style="cursor:pointer; position:relative;">
+            <img src="Untitled project (18).jpg" alt="Melto Run Locked Character">
+            <div style="position:absolute; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:900; letter-spacing:2px; text-transform:uppercase;">Locked • Pay ₹100</div>
+          </div>
+        `;
+      }
+    }
+
+    // Trigger payment system hook
+    function initiatePayment() {
+      // Hook up your payment gateway client script (e.g., BillDesk, Razorpay) here.
+      // Funds will route directly to the merchant business bank account configured on your gateway dashboard.
+      alert("Redirecting to secure payment gateway (₹100)... Funds will route directly to your verified business account.");
+      // Example simulation of payment success for testing:
+      // fetch('/api/create-payment-session', { method: 'POST' })...
+    }
+
+    // 2. DYNAMIC PRELOADER PROGRESS FILLER
     window.addEventListener('DOMContentLoaded', () => {
+      checkUserAccess();
       const fill = document.getElementById('loader-fill');
       let progress = 0;
       const interval = setInterval(() => {
@@ -962,7 +1007,7 @@
       }, 1000);
     }
 
-    // 2. AMBIENT BACKGROUND PARTICLE & WEB NET FIELD
+    // 3. AMBIENT BACKGROUND PARTICLE & WEB NET FIELD
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -1033,47 +1078,46 @@
     }
     animateParticles();
 
-    // 3. CUSTOM HUD CURSOR INTERACTION
+    // 4. CUSTOM HUD CURSOR ENGINE
     const cursorRing = document.getElementById('cursor-ring');
     const cursorDot = document.getElementById('cursor-dot');
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let ringX = mouseX;
-    let ringY = mouseY;
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
 
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      cursorDot.style.left = `${mouseX}px`;
-      cursorDot.style.top = `${mouseY}px`;
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top = mouseY + 'px';
     });
 
-    function updateCursor() {
+    function renderCursor() {
       ringX += (mouseX - ringX) * 0.2;
       ringY += (mouseY - ringY) * 0.2;
-      cursorRing.style.left = `${ringX}px`;
-      cursorRing.style.top = `${ringY}px`;
-      requestAnimationFrame(updateCursor);
+      cursorRing.style.left = ringX + 'px';
+      cursorRing.style.top = ringY + 'px';
+      requestAnimationFrame(renderCursor);
     }
-    updateCursor();
+    renderCursor();
 
     document.querySelectorAll('.hover-trigger').forEach(el => {
       el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-hover'));
       el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-hover'));
     });
 
-    // 4. SCROLL REVEAL ANIMATIONS
+    // 5. SCROLL REVEAL OBSERVER
     function initScrollReveal() {
       const reveals = document.querySelectorAll('.reveal');
-      const observer = new IntersectionObserver((entries, observer) => {
+      const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('active');
+            obs.unobserve(entry.target);
           }
         });
       }, { threshold: 0.15 });
 
-      reveals.forEach(reveal => observer.observe(reveal));
+      reveals.forEach(r => observer.observe(r));
     }
   </script>
 </body>
