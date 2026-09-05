@@ -925,7 +925,7 @@
       <div class="footer-col">
         <h4>Connect</h4>
         <a href="#" class="hover-trigger">Discord Community</a>
-        <a href="#" class="hover-trigger">Support Portal</a>
+        <a href="mailto:supermoniorunsupport@gmail.com" class="hover-trigger">Support: supermoniorunsupport@gmail.com</a>
         <a href="#" class="hover-trigger">Business Inquiries</a>
       </div>
     </div>
@@ -1011,8 +1011,10 @@
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Draw web lines between close particles
       for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
@@ -1027,16 +1029,11 @@
           }
         }
       }
-
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
       requestAnimationFrame(animateParticles);
     }
     animateParticles();
 
-    // 3. HUD CUSTOM CURSOR (LERP)
+    // 3. CUSTOM HUD CURSOR INTERACTION
     const cursorRing = document.getElementById('cursor-ring');
     const cursorDot = document.getElementById('cursor-dot');
     let mouseX = window.innerWidth / 2;
@@ -1051,82 +1048,32 @@
       cursorDot.style.top = `${mouseY}px`;
     });
 
-    function animateCursor() {
+    function updateCursor() {
       ringX += (mouseX - ringX) * 0.2;
       ringY += (mouseY - ringY) * 0.2;
       cursorRing.style.left = `${ringX}px`;
       cursorRing.style.top = `${ringY}px`;
-      requestAnimationFrame(animateCursor);
+      requestAnimationFrame(updateCursor);
     }
-    animateCursor();
+    updateCursor();
 
     document.querySelectorAll('.hover-trigger').forEach(el => {
       el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-hover'));
       el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-hover'));
     });
 
-    // 4. MAGNETIC HOVER PHYSICS
-    const magnets = document.querySelectorAll('.magnetic');
-    magnets.forEach(magnet => {
-      magnet.addEventListener('mousemove', (e) => {
-        const rect = magnet.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        magnet.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.03)`;
-      });
-      magnet.addEventListener('mouseleave', () => {
-        magnet.style.transform = 'translate(0px, 0px) scale(1)';
-        magnet.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
-      });
-      magnet.addEventListener('mouseenter', () => {
-        magnet.style.transition = 'none';
-      });
-    });
-
-    // 5. PARALLAX SCROLL & NAVBAR HIDE
-    const prlxBg = document.getElementById('prlx-bg');
-    const navbar = document.getElementById('navbar');
-    let lastScrollY = window.scrollY;
-
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      
-      if (prlxBg) {
-        prlxBg.style.transform = `translateY(${currentScrollY * 0.35}px)`;
-      }
-
-      if (currentScrollY > lastScrollY && currentScrollY > 120) {
-        navbar.style.transform = 'translateY(-100%)';
-      } else {
-        navbar.style.transform = 'translateY(0)';
-      }
-      lastScrollY = currentScrollY;
-    });
-
-    // 6. INTERSECTION OBSERVER (SCROLL REVEAL)
+    // 4. SCROLL REVEAL ANIMATIONS
     function initScrollReveal() {
-      const observerOptions = {
-        root: null,
-        rootMargin: '0px 0px -80px 0px',
-        threshold: 0.1
-      };
-
-      const observer = new IntersectionObserver((entries, obs) => {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('active');
-            obs.unobserve(entry.target);
           }
         });
-      }, observerOptions);
+      }, { threshold: 0.15 });
 
-      document.querySelectorAll('.reveal').forEach(el => {
-        observer.observe(el);
-      });
-      
-      document.querySelectorAll('.hero-content.reveal').forEach(el => {
-        el.classList.add('active');
-      });
+      reveals.forEach(reveal => observer.observe(reveal));
     }
   </script>
 </body>
