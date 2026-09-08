@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TST Labs - Melto Run: Online Multiplayer</title>
+  <style>
+    :root {
+      --bg-dark: #050508;
+      --bg-surface: #0b0d14;
+      --accent-cyan: #00f0ff;
+      --accent-orange: #ff5500;
+      --accent-green: #00ff66;
+      --text-main: #f0f4f8;
+      --text-muted: #8a99ad;
+      --glass-border: rgba(0, 240, 255, 0.15);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--bg-dark); color: var(--text-main); font-family: system-ui, -apple-system, sans-serif; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      padding: 1.2rem 6%; display: flex; justify-content: space-between; align-items: center;
+      z-index: 1000; background: rgba(5, 5, 8, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--glass-border);
+    }
+    .nav-brand { font-weight: 800; font-size: 1.2rem; color: #fff; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; }
+    .nav-links a:hover { color: var(--accent-cyan); }
+
+    .btn-pay {
+      background: linear-gradient(135deg, var(--accent-orange), #ff0055);
+      color: #fff; font-weight: 800; padding: 0.6rem 1.4rem; border-radius: 8px;
+      border: none; cursor: pointer; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;
+    }
+
+    .hero {
+      min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 8rem 6% 3rem 6%; background: radial-gradient(circle at center, #0d1222 0%, var(--bg-dark) 70%);
+    }
+    .hero h1 { font-size: 3rem; font-weight: 900; margin-bottom: 1rem; text-transform: uppercase; }
+    .hero p { max-width: 650px; color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem; }
+
+    .section { padding: 4rem 6%; }
+    .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .preview-card { background: var(--bg-surface); border: 1px solid var(--glass-border); border-radius: 16px; padding: 2rem; text-align: center; }
+    .price-tag { font-size: 1.8rem; font-weight: 800; color: var(--accent-green); margin: 1rem 0; }
+    
+    .email-input {
+      width: 100%; padding: 0.8rem; margin-bottom: 1rem; border-radius: 8px;
+      border: 1px solid var(--glass-border); background: #121624; color: #fff; font-size: 0.9rem;
+    }
+
+    footer { background: var(--bg-surface); border-top: 1px solid var(--glass-border); padding: 3rem 6%; margin-top: 4rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; }
+    .footer-col a, .footer-col p { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; display: block; margin-bottom: 0.6rem; }
+    .footer-col a:hover { color: var(--accent-cyan); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-brand">TST LABS</a>
+    <div class="nav-links">
+      <a href="#game">Melto Run</a>
+      <a href="https://super-monio-run-website2.vercel.app/" target="_blank">Game Portal</a>
+      <a href="https://tst-labs-terms-and-conditions.vercel.app/" target="_blank">Legal Policies</a>
+      <button onclick="document.getElementById('email-field').focus()" class="btn-pay">Pay ₹100</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Built to Innovate & Entertain</h1>
+    <p>Official studio portal for TST Labs. Purchase full digital access keys to our flagship online title below.</p>
+  </section>
+
+  <section id="game" class="section">
+    <div class="product-grid">
+      <div class="preview-card">
+        <h3 style="color: var(--accent-cyan); margin-bottom: 1rem;">GAMEPLAY PREVIEW</h3>
+        <p style="color: var(--text-muted);">Melto Run: High-speed competitive multiplayer browser parkour.</p>
+        <br />
+        <a href="https://super-monio-run-website2.vercel.app/" target="_blank" style="color: var(--accent-orange); text-decoration: none; font-weight: bold;">Visit Game Portal →</a>
+      </div>
+      <div>
+        <h2>Melto Run: Online Multiplayer</h2>
+        <div class="price-tag">₹100.00 <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal;">(Lifetime Access Key)</span></div>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">Instant Digital Fulfillment: Your key & email receipt will be sent immediately post-payment.</p>
+        
+        <input type="email" id="email-field" class="email-input" placeholder="Enter your email to receive receipt" required />
+        <button onclick="initiatePayment()" class="btn-pay" style="width: 100%; padding: 1rem;">Pay ₹100 via BillDesk</button>
+      </div>
+    </div>
+  </section>
+
+  <footer id="compliance">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4 style="color: #fff; margin-bottom: 1rem;">TST Labs</h4>
+        <p>Digital game publishing studio.</p>
+        <p style="margin-top: 0.5rem;">Address: Near Shahu Engineering college, Sham Nagar, Buldhana</p>
+      </div>
+      <div class="footer-col">
+        <h4 style="color: #fff; margin-bottom: 1rem;">Legal Links</h4>
+        <a href="https://tst-labs-terms-and-conditions.vercel.app/" target="_blank">Terms & Conditions</a>
+        <a href="https://tst-labs-terms-and-conditions.vercel.app/" target="_blank">Privacy Policy</a>
+        <a href="https://tst-labs-terms-and-conditions.vercel.app/" target="_blank">Refund & Cancellation</a>
+      </div>
+      <div class="footer-col">
+        <h4 style="color: #fff; margin-bottom: 1rem;">Customer Support</h4>
+        <p>Email: supermoniorunsupport@gmail.com</p>
+        <p>Game Portal: <a href="https://super-monio-run-website2.vercel.app/" target="_blank" style="color: var(--accent-cyan);">Visit Site</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    async function initiatePayment() {
+      const email = document.getElementById('email-field').value;
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address to receive your receipt.');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/create-billdesk-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        
+        if (data.success && data.gatewayUrl && data.msg) {
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = data.gatewayUrl;
+          
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'msg';
+          input.value = data.msg;
+          
+          form.appendChild(input);
+          document.body.appendChild(form);
+          form.submit();
+        } else {
+          alert('Failed to initialize payment gateway.');
+        }
+      } catch (err) {
+        alert('Server Connection Error: Make sure node server.js is running.');
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('status') === 'success') {
+        alert('Payment Successful! A receipt has been sent to your email.');
+      } else if (params.get('status') === 'failed') {
+        alert('Payment transaction failed.');
+      }
+    });
+  </script>
+</body>
+</html>
